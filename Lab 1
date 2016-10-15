@@ -1,0 +1,138 @@
+#include <stdlib.h>
+#include <stdio.h>
+double* read_file(char*filename, int length);
+double find_min(double* array, int length);
+double find_max(double* array, int length);
+void write_to_file(char* filename, double* array, int length);
+int length;
+
+int main(int argc, char* argv[])
+{
+        int length = atoi(argv[1]);
+
+        if (argc != 4)
+        { printf("Incorrect Usage");
+        }
+
+        double* array= read_file(argv[2], length);
+        double max= find_max(array, length);
+        double min= find_min(array, length);
+        write_to_file(argv[3], array, length);
+
+        printf("min:%.2lf\nmax:%.2lf\n", min, max);
+
+return 0;
+}
+
+double* read_file(char* filename, int length)
+{
+        FILE *file;
+
+        if ((file= fopen(filename, "r"))==NULL) {
+                printf("Could not open file");
+}
+
+        if (length <=0)
+        {
+                return NULL;
+        }
+  
+        double* array= malloc(sizeof(double)*length);
+        int i=0;
+        for(i=0; i<length; i++){
+                fscanf(file, "%lf", &array[i]);
+        }
+
+                return array;
+}
+
+double find_min(double* array, int length)
+{
+        int i;
+        double small=1000000.0;
+        for (i=0; i<length; i++)
+        {
+                if (array[i]<small)
+                {
+                        small=array[i];
+                }
+        }
+return small;
+}
+
+double find_max(double* array, int length)
+{
+        int i;
+        double large=0;
+        for (i=0; i<length; i++)
+        {
+                if (array[i]>large)
+                {
+                        large=array[i];
+                }
+        }
+return large;
+}
+
+void write_to_file(char*filename, double* array, int length)
+{
+        int i=0;
+        FILE *file;
+        if ((file= fopen(filename, "r"))==NULL) {
+                printf("Could not open file");
+}
+
+        if (length <=0)
+        {
+                return NULL;
+        }
+        double* array= malloc(sizeof(double)*length);
+        int i=0;
+        for(i=0; i<length; i++){
+                fscanf(file, "%lf", &array[i]);
+        }
+
+                return array;
+}
+
+double find_min(double* array, int length)
+{
+        int i;
+        double small=1000000.0;
+        for (i=0; i<length; i++)
+        {
+                if (array[i]<small)
+                {
+                        small=array[i];
+                }
+        }
+return small;
+}
+
+double find_max(double* array, int length)
+{
+        int i;
+        double large=0;
+        for (i=0; i<length; i++)
+        {
+                if (array[i]>large)
+                {
+                        large=array[i];
+                }
+return large;
+}
+
+void write_to_file(char*filename, double* array, int length)
+{
+        int i=0;
+        FILE *file;
+        if((file=fopen(filename, "w"))==NULL){
+        printf("Unable to write to file");
+        }
+
+        for (i=0; i<length; i++){
+                fprintf(file, "%.2lf\n", array[length-i]);
+        }
+}
+
+
